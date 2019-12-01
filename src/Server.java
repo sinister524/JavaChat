@@ -12,7 +12,7 @@ public class Server {
     public static void main(String[] args) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Socket socket;
-        try (ServerSocket serverSocket = new ServerSocket(8888)) {
+        try (ServerSocket serverSocket = new ServerSocket(5000)) {
             System.out.println("Сервер запущен, ждёт подключения...");
             socket = serverSocket.accept();
             System.out.println("Клиент подключился");
