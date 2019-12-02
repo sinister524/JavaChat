@@ -1,19 +1,13 @@
+package main.java;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ChatWindow extends JFrame {
 
-    JButton send = new JButton("Отправить");
-    JTextField message = new JTextField();
-    JTextField userName = new JTextField();
-    JTextArea users = new JTextArea();
-    JScrollPane usersOnline = new JScrollPane(users);
-    JTextArea chat = new JTextArea();
-    JScrollPane chatHistory = new JScrollPane(chat);
-    JTextArea onlineNow = new JTextArea("Сейчас в чате:");
-    JTextArea historyTitle = new JTextArea("История чата:");
+    private JTextField message = new JTextField();
+    private JTextField userName = new JTextField();
+    private JTextArea chat = new JTextArea();
 
 
     public ChatWindow() {
@@ -40,6 +34,7 @@ public class ChatWindow extends JFrame {
 
 //        Добавление элементов нанижнюю панель
 
+        JButton send = new JButton("Отправить");
         send.setPreferredSize(new Dimension(100,60));
         try {
             String name = JOptionPane.showInputDialog ("Введи свой никнейм");
@@ -53,18 +48,8 @@ public class ChatWindow extends JFrame {
         userName.setEditable(false);
         userName.setPreferredSize(new Dimension(100,60));
 
-        send.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AddStrings.sendText(userName,message, chat);
-            }
-        });
-        message.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AddStrings.sendText(userName, message, chat);
-            }
-        });
+        send.addActionListener(e -> AddStrings.sendText(userName,message, chat));
+        message.addActionListener(e -> AddStrings.sendText(userName, message, chat));
         downPanel.add(userName, BorderLayout.LINE_START);
         downPanel.add(send, BorderLayout.LINE_END);
         downPanel.add(message, BorderLayout.CENTER);
@@ -73,9 +58,11 @@ public class ChatWindow extends JFrame {
 //        Добавление элементов в левую панель
 
 
+        JTextArea users = new JTextArea();
         users.setPreferredSize(new Dimension(100,100));
         users.setEditable(false);
         users.append(userName.getText() + "\n");
+        JScrollPane usersOnline = new JScrollPane(users);
         leftPanel.add(usersOnline);
 
 
@@ -83,12 +70,15 @@ public class ChatWindow extends JFrame {
 
 
         chat.setEditable(false);
+        JScrollPane chatHistory = new JScrollPane(chat);
         centrePanel.add(chatHistory);
 
 //        добавление элементов в верхнюю панель
 
+        JTextArea onlineNow = new JTextArea("Сейчас в чате:");
         onlineNow.setPreferredSize(new Dimension(100,20));
         onlineNow.setEnabled(false);
+        JTextArea historyTitle = new JTextArea("История чата:");
         historyTitle.setEnabled(false);
         upPanel.add(onlineNow, BorderLayout.LINE_START);
         upPanel.add(historyTitle, BorderLayout.CENTER);
