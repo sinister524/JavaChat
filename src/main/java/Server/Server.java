@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Server {
 
@@ -25,7 +26,7 @@ public class Server {
                 if (strFromClient.equalsIgnoreCase("/end")) {
                     break;
                 }
-                System.out.println("log: " + LocalDate.now() + " " + strFromClient);
+                System.out.println("log: " + dateFormat.format(new Date()) + " " + strFromClient);
                 outPutStream.writeUTF("echo: " + strFromClient);
             }
         } catch (IOException e) {
