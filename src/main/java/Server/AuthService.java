@@ -2,11 +2,11 @@ package Server;
 
 import java.sql.*;
 
-public class AuthService {
+public abstract class AuthService {
     private static Connection connection;
     private static Statement statement;
 
-    public void connect (){
+    public static void connect (){
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:chatDB");
             statement = connection.createStatement();
@@ -15,7 +15,7 @@ public class AuthService {
         }
     }
 
-    public void close () {
+    public static void disconnect () {
         try {
             connection.close();
         } catch (SQLException e) {
@@ -23,7 +23,7 @@ public class AuthService {
         }
     }
 
-    public String authorization (String login, String password){
+    public static String authorization (String login, String password){
         String query = String.format("SELECT nick_name FROM authUsers WHERE login = '%s' & password = %s", login , password.hashCode());
         try {
             ResultSet nick = statement.executeQuery(query);
@@ -36,7 +36,7 @@ public class AuthService {
         return null;
     }
 
-    public boolean registration (String login, String password, String nick){
+    public static boolean registration (String login, String password, String nick){
         String query = String.format("INSERT INTO authUsers(login, password, nick_name) VALUES('%s', %d, '%s')", login, password.hashCode(), nick);
         try {
             statement.execute(query);
