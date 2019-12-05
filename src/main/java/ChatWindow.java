@@ -7,22 +7,21 @@ public class ChatWindow extends JFrame {
     private JTextField message = new JTextField();
     private JTextField userName = new JTextField();
     private JTextArea chat = new JTextArea();
+    private JPanel upPanel = new JPanel();
+    private JPanel downPanel = new JPanel();
+    private JScrollPane leftPanel = new JScrollPane();
+    private JPanel centrePanel = new JPanel();
 
 
     public ChatWindow() {
-        setTitle("Test Window");
+        setTitle("Chat");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(400, 100, 700, 800);
         setLayout(new BorderLayout());
 
-        JPanel upPanel = new JPanel();
-        JPanel downPanel = new JPanel();
-        JPanel leftPanel = new JPanel();
-        JPanel centrePanel = new JPanel();
-
         upPanel.setLayout(new BorderLayout());
         downPanel.setLayout(new BorderLayout());
-        leftPanel.setLayout(new BorderLayout());
+//        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
         centrePanel.setLayout(new BorderLayout());
 
         add(upPanel, BorderLayout.PAGE_START);
@@ -30,9 +29,16 @@ public class ChatWindow extends JFrame {
         add(leftPanel, BorderLayout.LINE_START);
         add(centrePanel, BorderLayout.CENTER);
 
+        setDownPanel();
+        setLeftPanel();
+        setCentrePanel();
+        setUpPanel();
 
-//        Добавление элементов нанижнюю панель
+        setVisible(true);
 
+    }
+
+    private void setDownPanel() {
         JButton send = new JButton("Отправить");
         send.setPreferredSize(new Dimension(100,60));
         try {
@@ -52,28 +58,26 @@ public class ChatWindow extends JFrame {
         downPanel.add(userName, BorderLayout.LINE_START);
         downPanel.add(send, BorderLayout.LINE_END);
         downPanel.add(message, BorderLayout.CENTER);
+    }
 
-
-//        Добавление элементов в левую панель
-
-
+    private void setLeftPanel () {
+        leftPanel.setPreferredSize(new Dimension(100, 100));
         JTextArea users = new JTextArea();
         users.setPreferredSize(new Dimension(100,100));
         users.setEditable(false);
         users.append(userName.getText() + "\n");
-        JScrollPane usersOnline = new JScrollPane(users);
-        leftPanel.add(usersOnline);
+        leftPanel.add(users);
+//        JScrollPane usersOnline = new JScrollPane(users);
+//        leftPanel.add(usersOnline);
+    }
 
-
-//        Добавление Эементов в центральную панель
-
-
+    private void setCentrePanel () {
         chat.setEditable(false);
         JScrollPane chatHistory = new JScrollPane(chat);
         centrePanel.add(chatHistory);
+    }
 
-//        добавление элементов в верхнюю панель
-
+    private void setUpPanel () {
         JTextArea onlineNow = new JTextArea("Сейчас в чате:");
         onlineNow.setPreferredSize(new Dimension(100,20));
         onlineNow.setEnabled(false);
@@ -81,11 +85,5 @@ public class ChatWindow extends JFrame {
         historyTitle.setEnabled(false);
         upPanel.add(onlineNow, BorderLayout.LINE_START);
         upPanel.add(historyTitle, BorderLayout.CENTER);
-
-
-        setVisible(true);
-
     }
-
-
 }
