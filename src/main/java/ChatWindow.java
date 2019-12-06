@@ -9,7 +9,7 @@ public class ChatWindow extends JFrame {
     private JTextArea chat = new JTextArea();
     private JPanel upPanel = new JPanel();
     private JPanel downPanel = new JPanel();
-    private JScrollPane leftPanel = new JScrollPane();
+    private JPanel leftPanel = new JPanel();
     private JPanel centrePanel = new JPanel();
 
 
@@ -21,7 +21,7 @@ public class ChatWindow extends JFrame {
 
         upPanel.setLayout(new BorderLayout());
         downPanel.setLayout(new BorderLayout());
-//        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        leftPanel.setLayout(new BorderLayout());
         centrePanel.setLayout(new BorderLayout());
 
         add(upPanel, BorderLayout.PAGE_START);
@@ -62,13 +62,12 @@ public class ChatWindow extends JFrame {
 
     private void setLeftPanel () {
         leftPanel.setPreferredSize(new Dimension(100, 100));
-        JTextArea users = new JTextArea();
-        users.setPreferredSize(new Dimension(100,100));
-        users.setEditable(false);
-        users.append(userName.getText() + "\n");
-        leftPanel.add(users);
-//        JScrollPane usersOnline = new JScrollPane(users);
-//        leftPanel.add(usersOnline);
+        JTextArea user = new JTextArea();
+        user.setEditable(false);
+        user.append(userName.getText() + "\n");
+//        leftPanel.add(user);
+        JScrollPane usersOnline = new JScrollPane(user);
+        leftPanel.add(usersOnline);
     }
 
     private void setCentrePanel () {
