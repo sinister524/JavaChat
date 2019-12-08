@@ -2,28 +2,23 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AuthWindow extends JFrame {
-    private JTextField login = new JTextField();
-    private JPasswordField password = new JPasswordField();
+    private JTextField login = new JTextField("Login");
+    private JPasswordField password = new JPasswordField("Password");
     private JButton auth = new JButton("Войти");
     private JButton regist = new JButton("Регистрация");
 
     public AuthWindow() {
         setTitle("Auth");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setBounds(400, 100, 250, 150);
+        setBounds(400, 100, 250, 200);
 
-//        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-//        add(login, CENTER_ALIGNMENT);
-//        add(password, CENTER_ALIGNMENT);
-//        add(auth, CENTER_ALIGNMENT);
-//        add(regist, CENTER_ALIGNMENT);
 
         setLayout(new BorderLayout());
         JPanel textPanel = new JPanel();
-        textPanel.setLayout(new BorderLayout());
+        textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
         textPanel.setPreferredSize(new Dimension(250,100));
-        textPanel.add(login, BorderLayout.NORTH);
-        textPanel.add(password, BorderLayout.SOUTH);
+        textPanel.add(login);
+        textPanel.add(password);
 
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
@@ -37,4 +32,5 @@ public class AuthWindow extends JFrame {
         add(buttonsPanel, BorderLayout.PAGE_END);
         setVisible(true);
     }
+
 }
