@@ -45,7 +45,7 @@ public class ClientHandler {
                         server.sendPersonalMsg(this, tokens[1], tokens[2]);
                     }
                 } else {
-                    server.broadcast(inString);
+                    server.broadcast(nick +": " + inString);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
