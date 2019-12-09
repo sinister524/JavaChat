@@ -69,6 +69,17 @@ public class ClientHandler {
                 } else {
                     sendMessage("/authNotOK");
                 }
+                if (inStr.startsWith("/regist")){
+                    String[] tokens = inStr.split(" ");
+                    if (AuthService.registration(tokens[1], Integer.parseInt(tokens[2]), tokens[3])){
+                        sendMessage("/registOK");
+                        this.nick = tokens[3];
+                        server.subscribe(this);
+                        break;
+                    } else {
+                        sendMessage("/registNotOK");
+                    }
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

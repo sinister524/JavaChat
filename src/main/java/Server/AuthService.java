@@ -36,8 +36,8 @@ public abstract class AuthService {
         return null;
     }
 
-    public static boolean registration (String login, String password, String nick){
-        String query = String.format("INSERT INTO authUsers(login, password, nick_name) VALUES('%s', %d, '%s')", login, password.hashCode(), nick);
+    public static boolean registration (String login, int password, String nick){
+        String query = String.format("INSERT INTO authUsers(login, password, nick_name) VALUES('%s', %d, '%s')", login, password, nick);
         try {
             statement.execute(query);
             return true;

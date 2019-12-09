@@ -13,7 +13,7 @@ public class Server {
 
     private List<ClientHandler> clientsConnection = new CopyOnWriteArrayList<>();
 
-    public static void main(String[] args) {
+    public Server () {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Socket socket = null;
         try (ServerSocket serverSocket = new ServerSocket(5000)) {
@@ -22,6 +22,7 @@ public class Server {
             while (!serverSocket.isClosed()){
                 socket = serverSocket.accept();
                 System.out.println("Клиент подключился");
+                new ClientHandler(this, socket);
             }
         } catch (IOException e) {
             e.printStackTrace();
