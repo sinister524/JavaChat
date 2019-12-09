@@ -1,5 +1,7 @@
 package Server;
 
+import org.sqlite.SQLiteException;
+
 import java.sql.*;
 
 public abstract class AuthService {
@@ -41,6 +43,9 @@ public abstract class AuthService {
         try {
             statement.execute(query);
             return true;
+        } catch (SQLiteException e){
+            e.printStackTrace();
+            return false;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

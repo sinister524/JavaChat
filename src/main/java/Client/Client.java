@@ -18,7 +18,6 @@ public class Client {
                 try {
                     while (socket.isConnected()) {
                         String str = in.readUTF();
-
                         System.out.println("Сервер: " + str);
                     }
                 } catch (IOException e){
@@ -28,6 +27,7 @@ public class Client {
             while (socket.isConnected()) {
                 String str = reader.readLine();
                 if (str.equals("/end")) {
+                    out.writeUTF("/end");
                     socket.close();
                     break;
                 }
