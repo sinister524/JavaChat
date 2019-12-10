@@ -59,7 +59,7 @@ public class ClientHandler {
                 String inStr = inputStream.readUTF();
                 if (inStr.startsWith("/auth")) {
                     String[] tokens = inStr.split(" ");
-                    String nick = AuthService.authorization(tokens[1], tokens[2]);
+                    String nick = AuthService.authorization(tokens[1], Integer.parseInt(tokens[2]));
                     if (nick != null){
                         sendMessage("/authOK");
                         this.nick = nick;

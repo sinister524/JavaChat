@@ -25,12 +25,12 @@ public abstract class AuthService {
         }
     }
 
-    public static String authorization (String login, String password){
-        String query = String.format("SELECT nick_name FROM authUsers WHERE login = '%s' & password = %s", login , password.hashCode());
+    public static String authorization (String login, int password){
+        String query = String.format("SELECT nick_name FROM authUsers WHERE login = '%s' & password = %s", login , password);
         try {
-            ResultSet nick = statement.executeQuery(query);
+            ResultSet nick = statement.executeQuery("SELECT nick_name FROM authUsers WHERE login = '" + login + "' AND password = " + password);
             if (nick.next()){
-                return nick.getString("nick_name");
+                return nick.getString(3);
             }
         } catch (SQLException e) {
             e.printStackTrace();
