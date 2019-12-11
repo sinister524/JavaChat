@@ -40,7 +40,6 @@ public class ClientController {
                     e.printStackTrace();
                 }
             }).start();
-            socket.close();
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -49,15 +48,8 @@ public class ClientController {
 
     public void sendMessage (String message){
         try {
-            while (socket.isConnected()) {
-                if (message.equals("/end")) {
-                    out.writeUTF("/end");
-                    socket.close();
-                    break;
-                }
-                out.writeUTF(message);
-            }
-        } catch (IOException e){
+            out.writeUTF(message);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
