@@ -17,7 +17,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="12770" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
+              <component id="12770" class="javax.swing.JTextArea" binding="chatMessages">
                 <constraints/>
                 <properties>
                   <editable value="false"/>
@@ -38,15 +38,8 @@
             <constraints border-constraint="East"/>
             <properties>
               <enabled value="true"/>
+              <preferredSize width="92" height="60"/>
               <text value="Отправить"/>
-            </properties>
-          </component>
-          <component id="3ffcf" class="javax.swing.JLabel" binding="nickLabel">
-            <constraints border-constraint="West"/>
-            <properties>
-              <preferredSize width="80" height="30"/>
-              <text value="Nick"/>
-              <verticalTextPosition value="0"/>
             </properties>
           </component>
           <component id="39e6a" class="javax.swing.JTextField" binding="messageField">
@@ -55,17 +48,19 @@
           </component>
         </children>
       </grid>
-      <grid id="d3fbf" binding="leftPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
-        <constraints border-constraint="West"/>
-        <properties/>
+      <grid id="d3fbf" binding="rightPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="East"/>
+        <properties>
+          <minimumSize width="92" height="15"/>
+        </properties>
         <border type="none"/>
         <children>
           <scrollpane id="e0e58" binding="clientList">
             <constraints border-constraint="Center"/>
             <properties>
-              <maximumSize width="60" height="32767"/>
-              <minimumSize width="60" height="15"/>
-              <preferredSize width="80" height="0"/>
+              <maximumSize width="92" height="32767"/>
+              <minimumSize width="92" height="15"/>
+              <preferredSize width="92" height="0"/>
             </properties>
             <border type="none"/>
             <children/>
@@ -88,9 +83,9 @@
             </properties>
           </component>
           <component id="f24e" class="javax.swing.JLabel" binding="onlineNow">
-            <constraints border-constraint="West"/>
+            <constraints border-constraint="East"/>
             <properties>
-              <preferredSize width="80" height="32"/>
+              <preferredSize width="92" height="32"/>
               <text value=""/>
             </properties>
           </component>
