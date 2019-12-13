@@ -11,6 +11,9 @@ public class ClientController {
     private DataInputStream in;
     private DataOutputStream out;
     private String inMessage;
+    private AuthWindow authWindow;
+    private RegistrationWindow registrationWindow;
+    private ChatWindow chatWindow;
 
 
     public ClientController() {
@@ -23,23 +26,26 @@ public class ClientController {
                     while (socket.isConnected()) {
                         inMessage = in.readUTF();
                         if (inMessage.equals("/authOK")){
-
-                        } else if (inMessage.equals("/authNitOK")){
-
+                            authWindow.setVisible(false);
+                            chatWindow = new ChatWindow(this);
+                        } else if (inMessage.equals("/authNotOK")){
+                            authWindow.setSystemInfo("Неверный логин/пароль");
                         } else if (inMessage.equals("/registOK")){
-
+                            registrationWindow.setVisible(false);
+                            chatWindow = new ChatWindow(this);
                         } else if (inMessage.equals("/registNotOK")){
-
+                            registrationWindow.setSystemInfo("Логин/ник уже занят");
                         } else if (inMessage.startsWith("/clientlist")){
-
+                            chatWindow.createClientList(inMessage);
                         } else {
-
+                            chatWindow.acceptMessage(inMessage);
                         }
                     }
                 } catch (IOException e){
                     e.printStackTrace();
                 }
             }).start();
+            authWindow = new AuthWindow(this);
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -54,4 +60,7 @@ public class ClientController {
         }
     }
 
+    public void setRegistrationWindow(RegistrationWindow registrationWindow) {
+        this.registrationWindow = registrationWindow;
+    }
 }

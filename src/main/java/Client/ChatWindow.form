@@ -38,7 +38,7 @@
             <constraints border-constraint="East"/>
             <properties>
               <enabled value="true"/>
-              <preferredSize width="92" height="60"/>
+              <preferredSize width="100" height="60"/>
               <text value="Отправить"/>
             </properties>
           </component>
@@ -58,9 +58,9 @@
           <scrollpane id="e0e58" binding="clientList">
             <constraints border-constraint="Center"/>
             <properties>
-              <maximumSize width="92" height="32767"/>
-              <minimumSize width="92" height="15"/>
-              <preferredSize width="92" height="0"/>
+              <maximumSize width="100" height="32767"/>
+              <minimumSize width="100" height="15"/>
+              <preferredSize width="100" height="0"/>
             </properties>
             <border type="none"/>
             <children/>

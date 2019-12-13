@@ -1,8 +1,11 @@
 package Client;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class ChatWindow extends JFrame {
     private JPanel rootPanel;
@@ -18,24 +21,64 @@ public class ChatWindow extends JFrame {
     private JTextArea chatMessages;
     private JLabel onlineNow;
     private String message;
+    private ClientController clientController;
 
-    public ChatWindow() {
+    public ChatWindow(ClientController clientController) {
+        this.clientController = clientController;
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
         setTitle("Chat");
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setBounds(400, 100, 700, 800);
         setContentPane(rootPanel);
         onlineNow.setText("<html>Сейчас в<br>чате: </html>");
         sendButton.addActionListener(e -> sendMessage());
         messageField.addActionListener(e -> sendMessage());
+        message = "";
+        addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                clientController.sendMessage("/end");
+                System.exit(0);
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+
+            }
+        });
         setVisible(true);
     }
 
 
     private void sendMessage () {
-        message = messageField + messageField.getText();
-//        send by ClientController
-        message = null;
+        message = message + messageField.getText();
+        this.clientController.sendMessage(message);
+        message = "";
         messageField.setText("");
     }
     private void makeMessagePrivate (String clientName) {
@@ -43,7 +86,7 @@ public class ChatWindow extends JFrame {
             message = "/w " + clientName + " " + message;
             sendButton.setText("<html>Отправить<br>" + clientName + "</html>");
         } else {
-            message = null;
+            message = "";
             sendButton.setText("Отправить");
         }
         sendButton.revalidate();
@@ -54,6 +97,7 @@ public class ChatWindow extends JFrame {
         rightPanel.removeAll();
         for (int i = 1; i < clients.length; i++) {
             JLabel clientNick = new JLabel(clients[i]);
+            clientNick.setPreferredSize(new Dimension(100, 20));
             clientNick.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
