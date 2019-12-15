@@ -42,7 +42,7 @@ public class ChatWindow extends JFrame {
 
             @Override
             public void windowClosing(WindowEvent e) {
-                clientController.sendMessage("/end");
+                clientController.close();
                 System.exit(0);
             }
 

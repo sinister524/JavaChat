@@ -25,12 +25,12 @@ public abstract class AuthService {
         }
     }
 
-    public static String authorization (String login, int password){
-        String query = String.format("SELECT nick_name FROM authUsers WHERE login = '%s' & password = %s", login , password);
+    public static String authorization (String login, String password){
+        String query = String.format("SELECT nick_name FROM authUsers WHERE login = '%s' AND password = '%s'", login , password);
         try {
-            ResultSet nick = statement.executeQuery("SELECT nick_name FROM authUsers WHERE login = '" + login + "' AND password = " + password);
+            ResultSet nick = statement.executeQuery(query);
             if (nick.next()){
-                return nick.getString(3);
+                return nick.getString("nick_name");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -38,8 +38,8 @@ public abstract class AuthService {
         return null;
     }
 
-    public static boolean registration (String login, int password, String nick){
-        String query = String.format("INSERT INTO authUsers(login, password, nick_name) VALUES('%s', %d, '%s')", login, password, nick);
+    public static boolean registration (String login, String password, String nick){
+        String query = String.format("INSERT INTO authUsers(login, password, nick_name) VALUES('%s', '%s', '%s')", login, password, nick);
         try {
             statement.execute(query);
             return true;

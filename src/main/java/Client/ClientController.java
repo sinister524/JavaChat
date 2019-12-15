@@ -63,4 +63,15 @@ public class ClientController {
     public void setRegistrationWindow(RegistrationWindow registrationWindow) {
         this.registrationWindow = registrationWindow;
     }
+
+    public void close() {
+        sendMessage("/end");
+        try {
+            in.close();
+            out.close();
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
