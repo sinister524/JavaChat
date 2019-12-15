@@ -70,6 +70,7 @@ public class ClientController {
             in.close();
             out.close();
             socket.close();
+            System.exit(0);
         } catch (IOException e) {
             e.printStackTrace();
         }

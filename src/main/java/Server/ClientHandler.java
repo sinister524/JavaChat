@@ -33,7 +33,7 @@ public class ClientHandler {
     }
 
     private void read() {
-        while (true) {
+        while (!socket.isClosed()) {
             try {
                 String inString = inputStream.readUTF();
                 if (inString.startsWith("/")){
@@ -54,9 +54,13 @@ public class ClientHandler {
     }
 
     private void authorization() {
-        while (true){
+        while (socket.isConnected()){
             try {
                 String inStr = inputStream.readUTF();
+                if (inStr.equalsIgnoreCase("/end")) {
+                    close();
+                    break;
+                }
                 if (inStr.startsWith("/auth")) {
                     String[] tokens = inStr.split(" ");
                     String nick = AuthService.authorization(tokens[1], tokens[2]);

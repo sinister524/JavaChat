@@ -43,7 +43,6 @@ public class ChatWindow extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 clientController.close();
-                System.exit(0);
             }
 
             @Override
@@ -127,6 +126,7 @@ public class ChatWindow extends JFrame {
             rightPanel.add(clientNick);
             clientList.revalidate();
         }
+        rightPanel.revalidate();
     }
     protected void acceptMessage (String message) {
         chatMessages.append(message + "\n");

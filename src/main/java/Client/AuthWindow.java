@@ -32,7 +32,6 @@ public class AuthWindow extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 clientController.close();
-                System.exit(0);
             }
 
             @Override
