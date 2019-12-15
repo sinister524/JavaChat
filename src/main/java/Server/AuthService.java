@@ -8,7 +8,7 @@ public abstract class AuthService {
     private static Connection connection;
     private static Statement statement;
 
-    public static void connect (){
+    protected static void connect (){
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:chatDB");
             statement = connection.createStatement();
@@ -17,7 +17,7 @@ public abstract class AuthService {
         }
     }
 
-    public static void disconnect () {
+    protected static void disconnect () {
         try {
             connection.close();
         } catch (SQLException e) {
@@ -25,7 +25,7 @@ public abstract class AuthService {
         }
     }
 
-    public static String authorization (String login, String password){
+    protected static String authorization (String login, String password){
         String query = String.format("SELECT nick_name FROM authUsers WHERE login = '%s' AND password = '%s'", login , password);
         try {
             ResultSet nick = statement.executeQuery(query);
@@ -38,15 +38,12 @@ public abstract class AuthService {
         return null;
     }
 
-    public static boolean registration (String login, String password, String nick){
+    protected static boolean registration (String login, String password, String nick){
         String query = String.format("INSERT INTO authUsers(login, password, nick_name) VALUES('%s', '%s', '%s')", login, password, nick);
         try {
             statement.execute(query);
             return true;
-        } catch (SQLiteException e){
-            e.printStackTrace();
-            return false;
-        } catch (SQLException e) {
+        }  catch (SQLException e) {
             e.printStackTrace();
             return false;
         }

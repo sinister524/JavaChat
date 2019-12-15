@@ -20,7 +20,7 @@ public class RegistrationWindow extends JFrame {
     private JPanel registPanel;
         private ClientController clientController;
 
-    public RegistrationWindow(ClientController clientController) {
+    protected RegistrationWindow(ClientController clientController) {
         this.clientController = clientController;
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setBounds(400, 100, 700, 800);
@@ -71,7 +71,7 @@ public class RegistrationWindow extends JFrame {
         this.clientController.sendMessage(registTokens);
     }
 
-    public void setSystemInfo (String info) {
+    protected void setSystemInfo (String info) {
         systemInfo.setText(info);
     }
 }

@@ -16,7 +16,7 @@ public class ClientController {
     private ChatWindow chatWindow;
 
 
-    public ClientController() {
+    protected ClientController() {
         try {
             socket = new Socket("localhost", 5000);
             in = new DataInputStream(socket.getInputStream());
@@ -52,7 +52,7 @@ public class ClientController {
 
     }
 
-    public void sendMessage (String message){
+    protected void sendMessage (String message){
         try {
             out.writeUTF(message);
         } catch (IOException e) {
@@ -60,11 +60,11 @@ public class ClientController {
         }
     }
 
-    public void setRegistrationWindow(RegistrationWindow registrationWindow) {
+    protected void setRegistrationWindow(RegistrationWindow registrationWindow) {
         this.registrationWindow = registrationWindow;
     }
 
-    public void close() {
+    protected void close() {
         sendMessage("/end");
         try {
             in.close();

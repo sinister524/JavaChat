@@ -23,7 +23,7 @@ public class ChatWindow extends JFrame {
     private String message;
     private ClientController clientController;
 
-    public ChatWindow(ClientController clientController) {
+    protected ChatWindow(ClientController clientController) {
         this.clientController = clientController;
         rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
         setTitle("Chat");
@@ -92,7 +92,7 @@ public class ChatWindow extends JFrame {
         sendButton.revalidate();
     }
 
-    public void createClientList (String onlineClients) {
+    protected void createClientList (String onlineClients) {
         String [] clients = onlineClients.split(" ");
         rightPanel.removeAll();
         for (int i = 1; i < clients.length; i++) {
@@ -128,7 +128,7 @@ public class ChatWindow extends JFrame {
             clientList.revalidate();
         }
     }
-    public void acceptMessage (String message) {
+    protected void acceptMessage (String message) {
         chatMessages.append(message + "\n");
     }
 }

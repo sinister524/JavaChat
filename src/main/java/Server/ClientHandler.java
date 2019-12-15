@@ -12,7 +12,7 @@ public class ClientHandler {
     private DataInputStream inputStream;
     private String nick;
 
-    public ClientHandler(Server server, Socket socket) {
+    protected ClientHandler(Server server, Socket socket) {
         try {
             this.server = server;
             this.socket = socket;
@@ -28,7 +28,7 @@ public class ClientHandler {
         }
     }
 
-    public String getNick() {
+    protected String getNick() {
         return nick;
     }
 
@@ -87,7 +87,7 @@ public class ClientHandler {
         }
     }
 
-    public void sendMessage(String message) {
+    protected void sendMessage(String message) {
         try {
             outputStream.writeUTF(message);
         } catch (IOException e) {

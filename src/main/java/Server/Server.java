@@ -13,7 +13,7 @@ public class Server {
 
     private List<ClientHandler> clientsConnection = new CopyOnWriteArrayList<>();
 
-    public Server () {
+    protected Server () {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Socket socket = null;
         try (ServerSocket serverSocket = new ServerSocket(5000)) {
@@ -36,24 +36,24 @@ public class Server {
         }
     }
 
-    public void broadcast (String message){
+    protected void broadcast (String message){
         for (ClientHandler clientHandler: clientsConnection) {
             clientHandler.sendMessage(message);
 
         }
     }
-    public void subscribe(ClientHandler clientHandler){
+    protected void subscribe(ClientHandler clientHandler){
         clientsConnection.add(clientHandler);
         broadcast("System: " + clientHandler.getNick() + " подключился к чату");
         broadcastClientList();
     }
-    public void unsubscribe (ClientHandler clientHandler){
+    protected void unsubscribe (ClientHandler clientHandler){
         clientsConnection.remove(clientHandler);
         broadcast("System: " + clientHandler.getNick() + " покинул чат");
         broadcastClientList();
     }
 
-    public void sendPersonalMsg(ClientHandler from, String nickTo, String message) {
+    protected void sendPersonalMsg(ClientHandler from, String nickTo, String message) {
         for (ClientHandler clientHandler : clientsConnection) {
             if (clientHandler.getNick().equalsIgnoreCase(nickTo)) {
                 clientHandler.sendMessage("FROM: " + from.getNick() + " SEND: " + message);
