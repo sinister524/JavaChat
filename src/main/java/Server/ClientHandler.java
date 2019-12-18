@@ -62,31 +62,38 @@ public class ClientHandler {
                     break;
                 }
                 if (inStr.startsWith("/auth")) {
+                    server.logger.info("Client " + socket.toString() + " try to authorization");
                     String[] tokens = inStr.split(" ");
                     String nick = AuthService.authorization(tokens[1], tokens[2]);
                     if (nick != null){
                         sendMessage("/authOK");
+                        server.logger.info("Client " + socket.toString() + " authorization success");
                         this.nick = nick;
                         server.subscribe(this);
                         break;
                     }else {
                         sendMessage("/authNotOK");
+                        server.logger.info("Client " + socket.toString() + " authorization failed");
                     }
                 }
                 if (inStr.startsWith("/regist")){
+                    server.logger.info("Client " + socket.toString() + " try to registration");
                     String[] tokens = inStr.split(" ");
                     boolean registIsOK = AuthService.registration(tokens[1], tokens[2], tokens[3]);
                     if (registIsOK){
                         sendMessage("/registOK");
+                        server.logger.info("Client " + socket.toString() + " registration success");
                         this.nick = tokens[3];
                         server.subscribe(this);
                         break;
                     } else {
                         sendMessage("/registNotOK");
+                        server.logger.info("Client " + socket.toString() + " registration failed");
                     }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+                server.logger.error("Error message", e);
             }
         }
     }
@@ -96,6 +103,7 @@ public class ClientHandler {
             outputStream.writeUTF(message);
         } catch (IOException e) {
             e.printStackTrace();
+            server.logger.error("Error message", e);
         }
     }
 
@@ -104,8 +112,10 @@ public class ClientHandler {
             inputStream.close();
             outputStream.close();
             socket.close();
+            server.logger.info("Client " + socket.toString() + " disconnected");
         } catch (IOException e) {
             e.printStackTrace();
+            server.logger.error("Error message", e);
         }
         server.unsubscribe(this);
     }
